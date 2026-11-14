@@ -6,7 +6,7 @@ export default function Privacy() {
     <ScrollView contentContainerStyle={s.page}>
       <Text style={s.title}>Privacy and disclaimer</Text>
       <Text style={s.p}>
-        Anywhere Pay is a prototype and demonstration. It is not a payment service, bank,
+        SunilPay (Anywhere Anytime Without restrictions) is a prototype and demonstration. It is not a payment service, bank,
         or money transmitter. No real money moves, and no real accounts can be linked.
       </Text>
       <Text style={s.p}>

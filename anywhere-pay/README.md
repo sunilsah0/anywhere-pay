@@ -1,56 +1,75 @@
-# Welcome to your Expo app 👋
+# SunilPay: Anywhere. Anytime. Without restrictions.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+> **PROTOTYPE. NOT A REAL PAYMENT SYSTEM.** SunilPay moves no real money, links no real accounts, collects no personal or financial data, and is not a bank, payment institution or money transmitter. Rates, fees and routes are simulated. It is not affiliated with or endorsed by UPI/NPCI, Fonepay, Swish, Vipps MobilePay, Wero/EPI, Pix, or any other payment system named.
 
-## Get started
+"Without restrictions" is the long-term **vision**, not a claim about what the prototype does today.
 
-1. Install dependencies
+## What
 
-   ```bash
-   npm install
-   ```
+A web and mobile prototype (one codebase) that shows how a single app could connect the world's national payment systems. A user picks a home country and a destination, chooses a payment type, and the app compares the possible routes: a direct rail link, a licensed local partner payout, or a card fallback.
 
-2. Start the app
+Supported payment types: **P2P** (person to person), **P2M** (person to merchant), **B2B** (business to business), **B2P** (business to person), **P2B** (person to business).
 
-   ```bash
-   npx expo start
-   ```
+The prototype covers 31 countries, including the USA, Australia, Japan, China, Nepal, India, South Africa, UAE, Germany, France and Sweden.
 
-In the output, you'll find options to open the app in a
+## Why
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Travellers from one country usually cannot use another country's instant payment app. The one thing that works almost everywhere is a card, which is usually the most expensive route.
+- Instant systems such as UPI (India), Fonepay (Nepal), Swish (Sweden), Pix (Brazil) and others are fast and cheap, but each is built for its own country.
+- Cross-border links exist only where operators sign agreements. UPI and Fonepay are linked (QR payments since 2024, remittance link reported in 2026). Europe's Wero and the EuroPA alliance are building links between European wallets. Sweden's central bank (the Riksbank) has encouraged linking Swish with its Nordic and European counterparts.
+- Cross-border transfers are still costly. For example, the World Bank reported an average total cost of about 7.3% for Sweden to India in Q3 2025.
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+SunilPay explores the idea of a neutral **connector layer** that sits above these systems instead of replacing them.
 
-## Get a fresh project
+## Where
 
-When you're ready, run:
+- Intended context: travellers and the diaspora moving between countries, starting with corridors such as Sweden, India and Nepal.
+- Runs in any modern browser, and as an Android app. iOS and store releases are out of scope for now.
+- Live link: add your Vercel address here.
+
+## How
+
+- **App:** Expo (React Native) with Expo Router, TypeScript, one codebase for web and mobile.
+- **Routing logic:** `src/routes.ts` holds the country list, simulated rates and the table of confirmed live links. The function `plans()` returns the routes sorted by fee.
+- **UI:** `src/app/index.tsx` is a scroll-driven landing page (parallax glow, scroll reveals, country marquee). `src/components/Demo.tsx` is the interactive demo. Demo history is stored only on the user's device (AsyncStorage).
+- **Hosting:** web on Vercel, Android builds with Expo EAS.
+
+Run locally:
 
 ```bash
-npm run reset-project
+npm install
+npx expo start      # press w for the browser
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+Add a country: add one line to `COUNTRIES` in `src/routes.ts` (name, currency, rough rate, payment system name).
 
-### Other setup steps
+## When
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+- Nov 2026: prototype built as a learning and portfolio project.
+- Planned: a small backend so rates and link status can be updated without rebuilding the app; sandbox integrations with licensed payment providers.
+- Not planned until a licensed partner is in place: real accounts, real money, public app-store release of a payment product.
 
-## Learn more
+## Novelty (honest)
 
-To learn more about developing your project with Expo, look at the following resources:
+This is not the first system to link payment networks. NPCI International, EPI/Wero and EuroPA already do this at the scheme level. What this prototype explores:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+1. **An honest link map.** Each country pair is marked live or needs-partner, and only links confirmed in public sources are shown as live.
+2. **Side-by-side route comparison** (direct link, local partner, card) with the fee visible before paying.
+3. **One flow for all five payment types** (P2P, P2M, B2B, B2P, P2B).
+4. **A beginner-built, open prototype** with one codebase for web and mobile, intended as a starting point for discussion with licensed partners.
 
-## Join the community
+## Limits and what real life requires
 
-Join our community of developers creating universal apps.
+- Payment and e-money licences (for example from Finansinspektionen in Sweden) or a licensed partner in each region.
+- Anti-money-laundering and customer identity checks, fraud controls, and agreements with each payment system operator.
+- Clear rules on who pays the fees in cross-border links (the Nepal and India QR rollout shows this matters).
+- Store rules: Apple expects financial apps to be submitted by a legal entity, and Google applies a closed-testing requirement to new personal developer accounts.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Sources
+
+Riksbank Payments Report 2026 and staff memo on mobile payments in Europe; EPI/EMPSA announcements on the EuroPA interoperability MoU (Feb 2026); NPCI International and Fonepay announcements; World Bank Remittance Prices Worldwide; EU Instant Payments Regulation and PSD3/PSR reporting.
+
+## Author
+
+Sunil 
+
